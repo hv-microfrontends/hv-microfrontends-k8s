@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: starships-service
+spec:
+  selector:
+    matchLabels:
+      app: starships-service
+  template:
+    metadata:
+      labels:
+        app: starships-service
+    spec:
+      containers:
+        - name: starships-service
+          image: skaffold-starships-service
+          ports:
+            - containerPort: 3002

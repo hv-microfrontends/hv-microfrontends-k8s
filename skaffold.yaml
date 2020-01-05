@@ -1,0 +1,37 @@
+apiVersion: skaffold/v1beta15
+kind: Config
+metadata:
+  name: skaffold-hv-microfrontends
+build:
+  artifacts:
+    - image: skaffold-container-service
+      context: ./services/container
+      sync:
+        infer:
+          - "**/*.js"
+    - image: skaffold-people-service
+      context: ./services/people
+      sync:
+        infer:
+          - "**/*.js"
+    - image: skaffold-starships-service
+      context: ./services/starships
+      sync:
+        infer:
+          - "**/*.js"
+deploy:
+  kubectl:
+    manifests:
+      - ./services/container/k8s-deployment.yaml
+      - ./services/people/k8s-deployment.yaml
+      - ./services/starships/k8s-deployment.yaml
+portForward:
+  - resourceType: deployment
+    resourceName: container-service
+    port: 3000
+  - resourceType: deployment
+    resourceName: people-service
+    port: 3001
+  - resourceType: deployment
+    resourceName: starships-service
+    port: 3002

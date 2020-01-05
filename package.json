@@ -1,0 +1,15 @@
+{
+  "name": "hv-microfrontends",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "start": "lerna run start --parallel",
+    "build": "lerna run build  --parallel",
+    "docker": "docker-compose up --force-recreate --build",
+    "k8s": "skaffold dev --port-forward"
+  },
+  "dependencies": {
+    "lerna": "^3.20.1"
+  }
+}

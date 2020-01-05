@@ -1,0 +1,37 @@
+version: "2"
+services:
+  container:
+    container_name: "container-container"
+    image: "container-image"
+    build:
+      context: ./services/container
+    command: npm start
+    volumes:
+      - ./services/container:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - 3000:3000
+
+  people:
+    container_name: "people-container"
+    image: "people-image"
+    build:
+      context: ./services/people
+    command: npm start
+    volumes:
+      - ./services/people:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - 3001:3001
+
+  starships:
+    container_name: "starships-container"
+    image: "starships-image"
+    build:
+      context: ./services/starships
+    command: npm start
+    volumes:
+      - ./services/starships:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - 3002:3002

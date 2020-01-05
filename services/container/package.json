@@ -1,0 +1,33 @@
+{
+  "name": "hv-microfrontends-container",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "webpack-dev-server --open --config=config/webpack/dev.js",
+    "build": "npm run clean && webpack -p --config=config/webpack/prod.js",
+    "docker": "docker-compose up --force-recreate --build",
+    "clean": "rimraf build/*"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "dotenv": "^8.2.0",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "rimraf": "^3.0.0",
+    "shortid": "^2.2.15",
+    "source-map-loader": "^0.2.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
+    "webpack-manifest-plugin": "^2.2.0",
+    "webpack-merge": "^4.2.2"
+  }
+}

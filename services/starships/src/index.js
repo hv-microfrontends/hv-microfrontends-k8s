@@ -1,20 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { service } from "@hv/utils";
 import App from "./App";
 
-const service = `${process.env.SERVICE_NAME}-${process.env.SERVICE_ID}`;
+const serviceId = `${process.env.SERVICE_NAME}-${process.env.SERVICE_ID}`;
 
-const render = (id = "root", history) => {
-  ReactDOM.render(<App history={history} />, document.getElementById(id));
-};
+service.registry({
+  id: serviceId,
 
-if (window[service]) {
-  window[`render${service}`] = (containerId, containerHistory) =>
-    render(containerId, containerHistory);
+  onRender: (id, history) => {
+    ReactDOM.render(
+      <App history={history} />,
+      document.getElementById(id || "root")
+    );
+  },
 
-  window[`unmount${service}`] = containerId => {
-    ReactDOM.unmountComponentAtNode(document.getElementById(containerId));
-  };
-} else {
-  render();
-}
+  onUnmount: id => {
+    ReactDOM.unmountComponentAtNode(document.getElementById(id));
+  }
+});

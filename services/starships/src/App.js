@@ -1,19 +1,26 @@
 import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router } from "react-router-dom";
+import HvProvider from "@hv/uikit-react-core/dist/Provider";
 import { createBrowserHistory } from "history";
+import Routes from "./lib/routes";
 
-import List from "./List";
-import Details from "./Details";
+const App = ({ history }) => {
+  const localHistory = history || createBrowserHistory();
 
-const defaultHistory = createBrowserHistory();
+  const routerConfig = {
+    push: route => {
+      localHistory.push(route);
+    },
+    prefetch: () => {}
+  };
 
-const App = ({ history }) => (
-  <Router history={history || defaultHistory}>
-    <Switch>
-      <Route exact path="/starships" component={List} />
-      <Route exact path="/starships/:id" component={Details} />
-    </Switch>
-  </Router>
-);
+  return (
+    <HvProvider router={routerConfig}>
+      <Router history={localHistory}>
+        <Routes />
+      </Router>
+    </HvProvider>
+  );
+};
 
 export default App;

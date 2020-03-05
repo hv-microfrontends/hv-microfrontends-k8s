@@ -27,7 +27,13 @@ const List = ({ classes }) => {
 
   return (
     <div className={classes.root}>
-      <HvList values={data} selectable={false} condensed selectable={false} />
+      <HvList
+        values={data}
+        selectable={false}
+        condensed
+        selectable={false}
+        useRouter
+      />
     </div>
   );
 };

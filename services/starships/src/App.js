@@ -5,6 +5,7 @@ import { createBrowserHistory } from "history";
 import Routes from "./lib/routes";
 
 const App = ({ history }) => {
+  const isEmbed = !!history;
   const localHistory = history || createBrowserHistory();
 
   const routerConfig = {
@@ -17,7 +18,7 @@ const App = ({ history }) => {
   return (
     <HvProvider router={routerConfig}>
       <Router history={localHistory}>
-        <Routes />
+        <Routes isEmbed={isEmbed} />
       </Router>
     </HvProvider>
   );

@@ -11,13 +11,13 @@ const getStyles = () => ({
   }
 });
 
-const withLayout = (Component, responsive = true) => props => {
+const withLayout = (Component, isEmbed = false, responsive = true) => props => {
   const minWidthNotResponsive = responsive ? {} : { minWidth: 1265 };
   const { wrapper, content } = getStyles();
 
   return (
     <div style={{ ...wrapper, ...minWidthNotResponsive }}>
-      <Header />
+      {!isEmbed && <Header />}
       <section id="content" style={{ ...content }}>
         <Component {...props} />
       </section>

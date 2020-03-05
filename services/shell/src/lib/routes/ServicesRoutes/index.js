@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { getServices } from "../../../store/services/thunks";
-import ServiceRoutes from "./ServiceRoutes";
+import ServicesRoutes from "./ServicesRoutes";
 
 const mapStateToProps = ({ services }) => {
   return {
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ServiceRoutes);
+export default connect(mapStateToProps, mapDispatchToProps)(ServicesRoutes);

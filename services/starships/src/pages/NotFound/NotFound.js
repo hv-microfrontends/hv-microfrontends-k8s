@@ -1,6 +1,5 @@
 import React from "react";
 import HvTypography from "@hv/uikit-react-core/dist/Typography";
-import withLayout from "../../lib/hocs/withLayout";
 
 const NotFound = ({ classes }) => {
   return (
@@ -10,4 +9,4 @@ const NotFound = ({ classes }) => {
   );
 };
 
-export default withLayout(NotFound);
+export default NotFound;

@@ -11,9 +11,7 @@ const ServicesRoutes = ({ services, getServices }) => {
     <Route
       key={service.name}
       path={`/${service.name}`}
-      component={({ history }) => (
-        <Service host={`http://${service.host}`} history={history} />
-      )}
+      component={() => <Service host={`http://${service.host}`} />}
     />
   ));
 };

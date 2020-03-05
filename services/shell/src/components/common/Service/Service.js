@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { service } from "@hv/utils";
+import withLayout from "../../../lib/hocs/withLayout";
 
 const Service = ({ host, history }) => {
-  const [serviceId, setServiceId] = useState(null);
+  const [container, setContainer] = useState(null);
 
   useEffect(() => {
-    let serviceId = null;
+    let idx;
 
     (async () => {
-      const { serviceId, serviceSrc } = await service.load(host);
+      const { id, container } = await service.registry(host);
 
-      setServiceId(serviceId);
+      idx = id;
 
-      service.render(serviceId, serviceSrc, history);
+      setContainer(container);
+
+      service.render(id, history);
     })();
 
-    return () => service.unmount(serviceId);
+    return () => service.unmount(idx);
   }, []);
 
-  return <main id={serviceId} />;
+  return <main id={container} />;
 };
 
-export default Service;
+export default withLayout(Service);

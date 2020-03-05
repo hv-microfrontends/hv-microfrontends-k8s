@@ -1,19 +1,15 @@
-const views = {
+const services = {
   data: [
     {
-      name: "people",
-      host: "localhost:3001"
-    },
-    {
       name: "starships",
-      host: "localhost:3002"
+      host: "localhost:3001"
     }
   ]
 };
 
 const fetchServices = async () => {
   return new Promise(resolve => {
-    setTimeout(() => resolve(views), 500);
+    setTimeout(() => resolve(services), 500);
   });
 };
 

@@ -5,17 +5,17 @@ import App from "./App";
 
 const serviceId = `${process.env.SERVICE_NAME}-${process.env.SERVICE_ID}`;
 
-service.registry({
+service.load({
   id: serviceId,
 
-  onRender: (id, history) => {
+  onRender: (container, history) => {
     ReactDOM.render(
       <App history={history} />,
-      document.getElementById(id || "root")
+      document.getElementById(container || "root")
     );
   },
 
-  onUnmount: id => {
-    ReactDOM.unmountComponentAtNode(document.getElementById(id));
+  onUnmount: container => {
+    ReactDOM.unmountComponentAtNode(document.getElementById(container));
   }
 });

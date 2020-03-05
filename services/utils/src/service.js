@@ -1,40 +1,56 @@
-const registry = ({ serviceId, onRender, onUnmount }) => {
-  if (window[serviceId]) {
-    window[`render${serviceId}`] = onRender;
-    window[`unmount${serviceId}`] = onUnmount;
+const getService = id => window[`service-${id}`];
+
+const registry = async host => {
+  const res = await fetch(`${host}/manifest.json`);
+  const manifest = await res.json();
+  const id = `${manifest.name}-${manifest.id}`;
+  const src = `${host}${manifest["main.js"]}`;
+
+  const service = getService(id);
+
+  if (!service)
+    window[`service-${id}`] = {
+      id,
+      src,
+      container: `container-${id}`,
+      render: null,
+      unmount: null
+    };
+
+  return getService(id);
+};
+
+const load = ({ id, onRender, onUnmount }) => {
+  const service = getService(id);
+
+  if (service) {
+    service.render = onRender;
+    service.unmount = onUnmount;
   } else {
     onRender();
   }
 };
 
-const load = async host => {
-  const serviceManifest = await fetch(`${host}/manifest.json`).json();
-  const serviceSrc = `${host}${serviceManifest["main.js"]}`;
-  const serviceId = `${serviceManifest.name}-${serviceManifest.id}`;
-
-  return { serviceId, serviceSrc };
-};
-
-const append = (serviceId, serviceSrc, onload) => {
+const append = (service, onload) => {
   const script = document.createElement("script");
-  script.id = serviceId;
+  script.id = service.id;
   script.crossOrigin = "";
-  script.src = serviceSrc;
+  script.src = service.src;
   script.onload = onload;
   document.head.appendChild(script);
 };
 
-const render = (serviceId, serviceSrc, history) => {
-  const render = window[`render${serviceId}`];
+const render = (id, history) => {
+  const service = getService(id);
 
-  window[serviceId]
-    ? render(serviceId, history)
-    : append(serviceId, serviceSrc, () => render(serviceId, history));
+  service && service.render
+    ? service.render(service.container, history)
+    : append(service, () => service.render(service.container, history));
 };
 
-const unmount = serviceId => {
-  const unmount = window[`unmount${serviceId}`];
-  unmount(serviceId);
+const unmount = id => {
+  const service = getService(id);
+  if (service) service.unmount(service.container);
 };
 
 export default {

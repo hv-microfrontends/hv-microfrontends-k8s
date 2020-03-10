@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-service
+spec:
+  selector:
+    matchLabels:
+      app: container-service
+  template:
+    metadata:
+      labels:
+        app: container-service
+    spec:
+      containers:
+        - name: container-service
+          image: skaffold-container-service
+          ports:
+            - containerPort: 3000

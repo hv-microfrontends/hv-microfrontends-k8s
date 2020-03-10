@@ -1,0 +1,22 @@
+{
+  "name": "@hv/utils",
+  "version": "0.1.0",
+  "main": "dist/utils.cjs.js",
+  "module": "dist/utils.esm.js",
+  "browser": "dist/utils.umd.js",
+  "dependencies": {
+    "ms": "^2.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "rollup": "^1.29.0"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "files": [
+    "dist"
+  ]
+}

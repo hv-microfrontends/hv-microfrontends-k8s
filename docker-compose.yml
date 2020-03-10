@@ -1,0 +1,25 @@
+version: "2"
+services:
+  container:
+    container_name: "shell-container"
+    image: "shell-image"
+    build:
+      context: ./services/shell
+    command: npm start
+    volumes:
+      - ./services/shell:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - 3000:3000
+
+  starships:
+    container_name: "starships-container"
+    image: "starships-image"
+    build:
+      context: ./services/starships
+    command: npm start
+    volumes:
+      - ./services/starships:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - 3001:3001

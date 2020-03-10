@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import Dummy from "../../pages/Dummy";
+import Overview from "../../pages/Overview";
 import NotFound from "../../pages/NotFound";
 // import ServicesRoutes from "./ServicesRoutes";
 import Service from "../../components/common/Service";
@@ -23,7 +23,7 @@ const Routes = () => (
         )}
       />
     ))}
-    <Route path="/dummy" component={Dummy} />
+    <Route exact path="/overview" component={Overview} />
     <Route component={NotFound} />
   </Switch>
 );

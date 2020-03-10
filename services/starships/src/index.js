@@ -16,6 +16,8 @@ service.load({
   },
 
   onUnmount: container => {
-    ReactDOM.unmountComponentAtNode(document.getElementById(container));
+    // ReactDOM.unmountComponentAtNode(document.getElementById(container));
   }
 });
+
+export default App;

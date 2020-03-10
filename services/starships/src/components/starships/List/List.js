@@ -4,6 +4,7 @@ import { fetchStarships } from "../../../lib/api/starships";
 
 const parseData = data =>
   data.map(elem => {
+    console.log('elem: ', elem);
     const id = elem.url.split("/").reverse()[1];
 
     return {

@@ -18,18 +18,13 @@ const boxStyles = {
 const navigationData = [
   {
     id: "1",
-    label: "People",
-    path: "/people"
+    label: "Overview",
+    path: "/overview"
   },
   {
     id: "2",
     label: "Starships",
     path: "/starships"
-  },
-  {
-    id: "3",
-    label: "Dummy",
-    path: "/dummy"
   }
 ];
 
